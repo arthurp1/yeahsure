@@ -3,6 +3,9 @@ import menu from './img/dots.png'
 import './App.css'
 import './data.json'
 import { location, challenge, state } from './mockdata.js'
+const Slider = require('react-slick');
+
+
 
 var moment = require('moment');
 moment().format();
@@ -19,11 +22,24 @@ console.log(time)
 // day="" challenge=""
 
 class App extends Component {
+  constructor(props) {
+    super(props)
+    this.changePage = this.changePage.bind(this)
+    this.state = { page: 'challenge'}
+  }
+  changeStatus() {
+    this.setState({ status: 'done' })
+    console.log('status changed to done')
+  }
+  changePage (page) {
+    this.setState({ page: page })
+    console.log('change page to', page)
+  }
   render() {
     return (
       <div className="background">
-        <Navbar day="0" />
-        <Routes day="0" display="challenge" />
+        <Navbar day="0" toggleStatus={ this.changeStatus } changePage={ this.changePage } />
+        <Routes day="0" display="challenge" page={this.state.page} changePage={ this.changePage } />
       </div>
     );
   }
@@ -32,28 +48,24 @@ class App extends Component {
 class Routes extends Component {
   constructor(props) {
     super(props)
-    this.state = { page: 'challenge'}
-  }
-  changePage (page) {
-    console.log('change page to', page)
-    this.setState({page: page})
   }
   render() {
-    switch (this.state.page) {
-      case 'challenge': return <Challenge day={ data } changePage={this.changePage.bind(this)}/>
-      case 'journal': return <Journal />
-      default: return <Challenge />
+    switch (this.props.page) {
+      case 'challenge': return <Challenge day={ data } changePage={ this.props.changePage }/>
+      case 'notes': return <Journal data={ data } status='pending' />
+      default: return <Challenge data= { data } />
     }
   }
 }
 
 class Navbar extends Component {
+
   render() {
     return (
     <div className="navbar">
-      <div className="day">Day 0.</div>
-      <div className="logo"><h1>yeahsure</h1></div>
-      <div className="menu"><img src={ menu } alt=""></img></div>
+      <div className="day" onClick={ () => this.props.changePage('notes') }>Day 0.</div>
+      <div className="logo" onClick={ () => this.props.changePage('challenge') }><h1>yeahsure</h1></div>
+      <div className="menu"><img src={ menu } onClick={ this.showMenu } alt=""></img></div>
     </div>
     );
   }
@@ -70,11 +82,13 @@ class Challenge extends Component {
     console.log('clicked')
     this.setState( { status: 'accepted', button: 'YOU\'RE IN CONTROL', message: ''} )
   }
-  renderLinks() {
-    if (this.state.status === 'accepted') { return (
+  renderLinks(props) {
+    console.log('link props', this.props)
+    if (this.state.status === 'accepted') {
+      return (
         <div className="links">
-          <div className="link" onClick={ this.props.day.journal[0].challenge.video } >Watch Video</div>
-          <div className="link" onClick={ this.props.changePage('journal')} >Add Note</div>
+          <a className="link" href={this.props.day.notes[0].challenge.video} target="_blank"> Watch Video</a>
+          <div className="link" onClick={ () => props.changePage('notes')} >Add Note</div>
         </div>
       )
     }
@@ -86,58 +100,52 @@ class Challenge extends Component {
       video,
       showLabels,
       shouldComplyAda
-    } = this.props.day.journal[0].challenge;
-    console.log(this.props)
+    } = this.props.day.notes[0].challenge
+    console.log('Challenge render()',this.props)
     return (
-    <div className="challenge_page page fadein" >
+    <div className="challenge page fadein" >
       <div className="challenge_title"><h1>{ title }</h1></div>
         <div className="text_area">
-          <div className="challenge_body"><p>{ body }</p></div>
-          <div>{this.renderLinks()}</div>
+          <div className="challenge"><p>{ body }</p></div>
+          <div>{this.renderLinks(this.props)}</div>
         </div>
-      <div className="button-cta">
-        <button onClick={ this.acceptChallenge.bind(this) } className={ this.state.status }>{ this.state.button }</button>
-      </div>
-      <div className="message">{ this.state.message }</div>
+        <div className="button-cta">
+          <button onClick={ this.acceptChallenge.bind(this) } className={ this.state.status }>{ this.state.button }</button>
+        </div>
+      <div className="message" onClick={ () => this.props.changePage('notes') }>{ this.state.message }</div>
     </div>
     );
   }
 }
-
-
-const noteList = (props) => {
-  // renderSearchSuggestion() behaves as a pseudo SearchSuggestion component
-  // keep it self contained and it should be easy to extract later if needed
-  const renderNotes = noteItem => (
-    <li key={noteItem.id}>{noteItem.name} {noteItem.id}</li>
-  );
-
-  return (
-    <ul>
-      {props.challenges.map([])}
-    </ul>
-  );
-};
 
 class Journal extends Component {
-  renderJournalItems() {
-
-  }
-
   render() {
+    const journal = this.props.data.notes
+    const today = (journal.length -1 )
+    const notes = journal.map( (note) => {
+      console.log(note)
+      return <li key={note.day} className="challenge">
+          <div className="title"><h1>{note.challenge.title}</h1></div>
+          <div className="note">
+            {note.challenge.note}
+          </div>
+        </li>
+    })
+    const settings = {
+      dots: false,
+      infinite: false,
+      arrows: false,
+      speed: 500,
+      slidesToShow: 1,
+      slidesToScroll: 1,
+      centerMode: true,
+      initialSlide: today
+    }
     return (
-      'list'
-    );
-  }
-}
-
-class NoteItem extends Component {
-  render() {
-    return (
-    <div className="note">
-      <h1>Hello</h1>
-    </div>
-    );
+      <Slider className="journal fadein" {...settings}>
+        {notes}
+      </Slider>
+    )
   }
 }
 
@@ -151,31 +159,50 @@ class NoteInput extends Component {
   }
 }
 
-
 const data = {
- displayday: 1,
- displayloc: 0,
- status: 'new',
- journal:  [{
-   day: 0,
-   status: 'done', //passed , calc based on note completedAt
-   challenge: {
-     id: 0,
-     title: "Practice saying \'no\' to yourself.",
-     body: "The ability to say “no” to yourself to put off short-term gratification for the long-term gain is an important life-skill. Like a muscle, it is strengthened with exercise. \n The more you practice saying “no” to small daily challenges, the better you can withstand major temptations.",
-     video: "https://www.youtube.com/watch?v=FtPRrn5nwAo",
-     status: 'done',
-     note: "The first day using this app and it’s still pretty shit. Hopefully a new version will come soon. And I was aware off my breath 3 times, even though the challenge was about something else. Good story bra!",
-     acceptedAt: "2017-03-31T23:11:05+01:00",
-     completedAt: "2017-03-31T23:11:05+01:00"
-   },
-   location: {
-     loc_id: 0,
-     loc_img: './img/bg0.jpg',
-     loc_url: "https://www.lonelyplanet.com/philippines/the-visayas/cebu",
-     loc_info: "Cebu, Phillipines"
-   }
- }]
+  displayday: 1,
+  displayloc: 0,
+  status: 'new',
+  notes:  [{
+    day: 0,
+    status: 'done', //passed , calc based on note completedAt
+    challenge: {
+      id: 0,
+      title: 'Ask yourself the three why’s.',
+      body: 'Before acting on a decision, ask yourself “Why?” Follow up your response with another “Why?” And then a third. If you can find three good reasons to pursue something, you’ll have clarity and be more confident in your actions.',
+      video: 'https://www.youtube.com/watch?v=_I-_0cnj_xQ',
+      status: 'done',
+      acceptedAt: "2017-03-31T23:11:05+01:00",
+      completedAt: "2017-03-31T23:11:05+01:00",
+      note: 'The first day using this app and it’s still pretty shit. Hopefully a new version will come soon. And I was aware off my breath 3 times, even though the challenge was about something else. Good story bra!'
+    },
+    location: {
+      loc_id: 0,
+      loc_img: './img/bg0.jpg',
+      loc_url: "https://www.lonelyplanet.com/philippines/the-visayas/cebu",
+      loc_info: "Cebu, Phillipines"
+    }
+  },
+  {
+    day: 1,
+    status: 'new', //passed , calc based on note completedAt
+    challenge: {
+      id: 1,
+      title: "Practice saying \'no\' to yourself.",
+      body: "The ability to say “no” to yourself to put off short-term gratification for the long-term gain is an important life-skill. Like a muscle, it is strengthened with exercise. \n The more you practice saying “no” to small daily challenges, the better you can withstand major temptations.",
+      video: "https://www.youtube.com/watch?v=FtPRrn5nwAo",
+      status: 'done',
+      acceptedAt: "2017-03-31T23:11:05+01:00",
+      completedAt: "2017-03-31T23:11:05+01:00",
+      note: ''
+    },
+    location: {
+      loc_id: 1,
+      loc_img: './img/bg0.jpg',
+      loc_url: "https://www.lonelyplanet.com/philippines/the-visayas/cebu",
+      loc_info: "Cebu, Phillipines"
+    }
+  }]
 }
 
 // VRAAG: background or on load?

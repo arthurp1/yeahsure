@@ -32,6 +32,15 @@ p {
   font-weight: 300;
 }
 
+a {
+  color: inherit;
+  text-decoration: inherit;
+}
+
+li {
+  list-style: none;
+}
+
 .logo {
   font-weight: 700px;
   font-size: 22px;
@@ -51,6 +60,11 @@ p {
 .fadein {
     -webkit-animation: fadein .7s ease 0s forwards;
 }
+.fadeout {
+    -webkit-animation: fadeout .7s ease 0s forwards;
+}
+
+
 
 .background {
   background: linear-gradient(
@@ -71,7 +85,7 @@ p {
   text-align: center;
 }
 
-.challenge_page {
+.challenge {
   margin-top: 70px;
   text-align: center;
 }
@@ -135,25 +149,33 @@ button {
 	background-color: rgba(255, 255, 255, 0.35);
 }
 
+.edit-note {
 
-//
-// .navbar {
-//   position: relative;
-//   width: 100%;
-//   .day {
-//     position: absolute;
-//     left: 10px;
-//   }
-//   .logo {
-//     position: absolute;
-//     text-align: center;
-//   }
-//   .menu {
-//     position: absolute;
-//     right: 10px;
-//   }
-// }
+}
 
+.view-notes {
+
+}
+
+.journal {
+  text-align: center;
+}
+
+.note1 {
+  width: 100%;
+  margin: 0 auto;
+  height: 400px;
+  background-color: $white_lite;
+}
+
+.note {
+  position: relative;
+  width: 90%;
+  padding: 30px;
+  height: 168px;
+  border-radius: 4px;
+  background-color: rgba(37, 37, 37, 0.4);
+}
 
 .navbar {
   text-align: center;
@@ -173,6 +195,7 @@ button {
     margin: 0 auto;
   }
 }
+
 // //Navbar
 // .navbar {
 //   position: relative;

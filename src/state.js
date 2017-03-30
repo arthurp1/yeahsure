@@ -39,8 +39,7 @@ export const state1 = {
       loc_url: "https://www.lonelyplanet.com/philippines/the-visayas/cebu",
       loc_info: "Cebu, Phillipines"
     }
-  }
-]
+  }]
 }
 
 export const state2 = {
