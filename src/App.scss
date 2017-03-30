@@ -5,13 +5,14 @@ $font-stack1: 'San Francisco', 'SanFranciscoDisplay', Arial, sans-serif;
 $font-stack: 'Open Sans', sans-serif;
 
 $white: white;
+$white_lite: rgba(255,255,255,0.85);
 $black: black;
 $primary: #27BDFF;
 $bold: 700;
 
 body {
   font-family: $font-stack;
-  color: white;
+  color: $white;
   font-weight: 300;
   font-size: 18px;
   text-rendering: optimizeLegibility;
@@ -34,10 +35,11 @@ p {
 .logo {
   font-weight: 700px;
   font-size: 22px;
+  color: $white;
 }
 
 .menu img {
-  height: 24px;
+  height: 22px;
 }
 
 .day {
@@ -46,10 +48,14 @@ p {
   letter-spacing: -0.5px;
 }
 
+.fadein {
+    -webkit-animation: fadein .7s ease 0s forwards;
+}
+
 .background {
   background: linear-gradient(
       rgba(0, 0, 0, 0.10),
-      rgba(0, 0, 0, 0.10)
+      rgba(0, 0, 0, 0.15)
     ), url('img/bg0.jpg');
   background-size: cover;
   background-position: center center;
@@ -74,9 +80,20 @@ p {
   margin: 6%;
 }
 
-.button-accept {
+.message {
   position: absolute;
-  margin-bottom: 30%;
+  margin-top: 10px;
+  font-size: 14px;
+  margin-bottom: 42px;
+  bottom: 0;
+  margin-left: auto;
+  left: 0;
+  right: 0;
+}
+
+.button-cta {
+  position: absolute;
+  margin-bottom: 65px;
   bottom: 0;
   margin-left: auto;
   left: 0;
@@ -91,7 +108,7 @@ button {
 }
 
 .new {
-	width: 178px;
+	width: 185px;
 	height: 38px;
 	border-radius: 26px;
 	background-color: $primary;
@@ -100,9 +117,9 @@ button {
 
 .links {
   text-align: left;
-  font-size: 19px;
+  font-size: 16px;
   font-weight: $bold;
-  line-height: 1.21;
+  line-height: 1.4;
   .link {
       cursor: pointer;
   }
@@ -110,7 +127,7 @@ button {
 
 .accepted {
   cursor: not-allowed;
-  color: rgba(255, 255, 255, 0.75);
+  color: rgba(255, 255, 255, 0.65);
   width: 178px;
 	height: 38px;
 	border-radius: 26px;
@@ -118,16 +135,6 @@ button {
 	background-color: rgba(255, 255, 255, 0.35);
 }
 
-.message {
-  position: absolute;
-  margin-top: 10px;
-  font-size: 14px;
-  margin-bottom: 23%;
-  bottom: 0;
-  margin-left: auto;
-  left: 0;
-  right: 0;
-}
 
 //
 // .navbar {
@@ -155,11 +162,11 @@ button {
   align-items: center;
   .day {
     position: absolute;
-    left: 20px;
+    left: 3%;
   }
   .menu {
     position: absolute;
-    right: 20px;
+    right: 3%;
   }
   .logo {
     display: inline-block;
@@ -184,7 +191,11 @@ button {
 //   }
 // }
 
-
+@media (min-width : 1024px) {
+  .page {
+    margin: 5% 28%;
+  }
+}
 
 @font-face {
   font-family: "San Francisco";

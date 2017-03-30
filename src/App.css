@@ -20,18 +20,22 @@ p {
 
 .logo {
   font-weight: 700px;
-  font-size: 22px; }
+  font-size: 22px;
+  color: white; }
 
 .menu img {
-  height: 24px; }
+  height: 22px; }
 
 .day {
   font-size: 23px;
   font-weight: 700;
   letter-spacing: -0.5px; }
 
+.fadein {
+  -webkit-animation: fadein .7s ease 0s forwards; }
+
 .background {
-  background: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1)), url("img/bg0.jpg");
+  background: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.15)), url("img/bg0.jpg");
   background-size: cover;
   background-position: center center;
   background-repeat: no-repeat;
@@ -52,9 +56,19 @@ p {
 .text_area {
   margin: 6%; }
 
-.button-accept {
+.message {
   position: absolute;
-  margin-bottom: 30%;
+  margin-top: 10px;
+  font-size: 14px;
+  margin-bottom: 42px;
+  bottom: 0;
+  margin-left: auto;
+  left: 0;
+  right: 0; }
+
+.button-cta {
+  position: absolute;
+  margin-bottom: 65px;
   bottom: 0;
   margin-left: auto;
   left: 0;
@@ -67,7 +81,7 @@ button {
   font-size: 13px; }
 
 .new {
-  width: 178px;
+  width: 185px;
   height: 38px;
   border-radius: 26px;
   background-color: #27BDFF;
@@ -75,31 +89,21 @@ button {
 
 .links {
   text-align: left;
-  font-size: 19px;
+  font-size: 16px;
   font-weight: 700;
-  line-height: 1.21; }
+  line-height: 1.4; }
 
 .links .link {
   cursor: pointer; }
 
 .accepted {
   cursor: not-allowed;
-  color: rgba(255, 255, 255, 0.75);
+  color: rgba(255, 255, 255, 0.65);
   width: 178px;
   height: 38px;
   border-radius: 26px;
   border: none;
   background-color: rgba(255, 255, 255, 0.35); }
-
-.message {
-  position: absolute;
-  margin-top: 10px;
-  font-size: 14px;
-  margin-bottom: 23%;
-  bottom: 0;
-  margin-left: auto;
-  left: 0;
-  right: 0; }
 
 .navbar {
   text-align: center;
@@ -109,15 +113,19 @@ button {
 
 .navbar .day {
   position: absolute;
-  left: 20px; }
+  left: 3%; }
 
 .navbar .menu {
   position: absolute;
-  right: 20px; }
+  right: 3%; }
 
 .navbar .logo {
   display: inline-block;
   margin: 0 auto; }
+
+@media (min-width: 1024px) {
+  .page {
+    margin: 5% 28%; } }
 
 @font-face {
   font-family: "San Francisco";

@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import menu from './img/dots.png'
 import './App.css'
 import './data.json'
+import { location, challenge, state } from './mockdata.js'
 
 var moment = require('moment');
 moment().format();
@@ -58,6 +59,7 @@ class Navbar extends Component {
   }
 }
 
+
 class Challenge extends Component {
   constructor(props) {
     super(props);
@@ -87,13 +89,13 @@ class Challenge extends Component {
     } = this.props.day.journal[0].challenge;
     console.log(this.props)
     return (
-    <div className="challenge_page page" >
+    <div className="challenge_page page fadein" >
       <div className="challenge_title"><h1>{ title }</h1></div>
         <div className="text_area">
           <div className="challenge_body"><p>{ body }</p></div>
           <div>{this.renderLinks()}</div>
         </div>
-      <div className="button-accept">
+      <div className="button-cta">
         <button onClick={ this.acceptChallenge.bind(this) } className={ this.state.status }>{ this.state.button }</button>
       </div>
       <div className="message">{ this.state.message }</div>
