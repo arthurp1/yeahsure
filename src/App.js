@@ -5,21 +5,10 @@ import './data.json'
 import { location, challenge, state } from './mockdata.js'
 const Slider = require('react-slick');
 
-
-
 var moment = require('moment');
 moment().format();
 let time = moment().toObject();
 console.log(time)
-
-//App
-// .Navbar
-// .Challenge
-// .Journal
-//    .Note
-//    .NoteInput
-
-// day="" challenge=""
 
 class App extends Component {
   constructor(props) {
@@ -59,7 +48,6 @@ class Routes extends Component {
 }
 
 class Navbar extends Component {
-
   render() {
     return (
     <div className="navbar">
@@ -70,7 +58,6 @@ class Navbar extends Component {
     );
   }
 }
-
 
 class Challenge extends Component {
   constructor(props) {
@@ -106,7 +93,7 @@ class Challenge extends Component {
     <div className="challenge page fadein" >
       <div className="challenge_title"><h1>{ title }</h1></div>
         <div className="text_area">
-          <div className="challenge"><p>{ body }</p></div>
+          <div className=""><p>{ body }</p></div>
           <div>{this.renderLinks(this.props)}</div>
         </div>
         <div className="button-cta">
@@ -121,13 +108,12 @@ class Challenge extends Component {
 class Journal extends Component {
   render() {
     const journal = this.props.data.notes
-    const today = (journal.length -1 )
+    const today = (journal.length -1)
     const notes = journal.map( (note) => {
-      console.log(note)
       return <li key={note.day} className="challenge">
           <div className="title"><h1>{note.challenge.title}</h1></div>
           <div className="note">
-            {note.challenge.note}
+            <p>{note.challenge.note}</p>
           </div>
         </li>
     })
@@ -152,9 +138,7 @@ class Journal extends Component {
 class NoteInput extends Component {
   render() {
     return (
-    <div className="note">
-      <h1>Hello</h1>
-    </div>
+    <textarea rows="4" cols="50">So what's up?</textarea>
     );
   }
 }
@@ -188,7 +172,7 @@ const data = {
     status: 'new', //passed , calc based on note completedAt
     challenge: {
       id: 1,
-      title: "Practice saying \'no\' to yourself.",
+      title: "Practice saying no to yourself.",
       body: "The ability to say “no” to yourself to put off short-term gratification for the long-term gain is an important life-skill. Like a muscle, it is strengthened with exercise. \n The more you practice saying “no” to small daily challenges, the better you can withstand major temptations.",
       video: "https://www.youtube.com/watch?v=FtPRrn5nwAo",
       status: 'done',

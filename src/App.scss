@@ -149,14 +149,6 @@ button {
 	background-color: rgba(255, 255, 255, 0.35);
 }
 
-.edit-note {
-
-}
-
-.view-notes {
-
-}
-
 .journal {
   text-align: center;
 }
@@ -169,13 +161,19 @@ button {
 }
 
 .note {
-  position: relative;
   width: 90%;
-  padding: 30px;
-  height: 168px;
+  min-height: 200px;
   border-radius: 4px;
   background-color: rgba(37, 37, 37, 0.4);
+  h1 {
+    font-size: 15px;
+  }
+  p {
+    padding: 18px;
+    font-size: 15px;
+  }
 }
+
 
 .navbar {
   text-align: center;
