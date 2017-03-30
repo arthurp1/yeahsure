@@ -1,6 +1,6 @@
 @import url("https://fonts.googleapis.com/css?family=Open+Sans:300,400,700");
 body {
-  font-family: "San Francisco", "SanFranciscoDisplay", Arial, sans-serif;
+  font-family: "Open Sans", sans-serif;
   color: white;
   font-weight: 300;
   font-size: 18px;
@@ -21,6 +21,9 @@ p {
 .logo {
   font-weight: 700px;
   font-size: 22px; }
+
+.menu img {
+  height: 24px; }
 
 .day {
   font-size: 23px;
@@ -44,8 +47,7 @@ p {
 
 .challenge_page {
   margin-top: 70px;
-  text-align: center;
-  height: 100%; }
+  text-align: center; }
 
 .text_area {
   margin: 6%; }
@@ -80,8 +82,9 @@ button {
 .links .link {
   cursor: pointer; }
 
-.pending {
+.accepted {
   cursor: not-allowed;
+  color: rgba(255, 255, 255, 0.75);
   width: 178px;
   height: 38px;
   border-radius: 26px;
