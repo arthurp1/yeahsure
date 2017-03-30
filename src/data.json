@@ -1,0 +1,21 @@
+[{
+  "daylvl": "1",
+  "missed": "3",
+  "startedAt": "2017-03-31T23:10:05+01:00",
+  "journal": [{
+    "day": "0",
+    "challenge": "0",
+    "location": "0",
+    "acceptedAt": "2017-03-31T23:11:05+01:00",
+    "completedAt": "2017-03-31T23:18:05+01:00",
+    "note": "The first day using this app and it’s still pretty shit. Hopefully a new version will come soon. And I was aware off my breath 3 times, even though the challenge was about something else. Good story bra!"
+  },
+  {
+    "day": "1",
+    "challenge": "1",
+    "location": "1",
+    "acceptedAt": "2017-04-01T23:11:05+01:00",
+    "completedAt": "2017-04-01T23:18:05+01:00",
+    "note": "Second day using it. And I really like that the background changes, although I forgot what the challenge was. Anyway enough reason for me to use it again tomorrow. :)"
+  }]
+}]
