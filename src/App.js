@@ -14,7 +14,7 @@ class App extends Component {
   constructor(props) {
     super(props)
     this.changePage = this.changePage.bind(this)
-    this.state = { page: 'challenge'}
+    this.state = data
   }
   changeStatus() {
     this.setState({ status: 'done' })
@@ -105,17 +105,51 @@ class Challenge extends Component {
   }
 }
 
+var Carousel = require('nuka-carousel');
+
+
 class Journal extends Component {
+  constructor(props) {
+    super(props)
+    this.toggleEdit = this.toggleEdit.bind(this);
+    this.onInputChange = this.onInputChange.bind(this);
+    this.state = { '0': 'The first day using this app and it’s still pretty shit. Hopefully a new version will come soon. And I was aware off my breath 3 times, even though the challenge was about something else. Good story bra!',
+                    '1': 'Nothing yet',
+                  edit: false}
+  }
+  onInputChange(e){
+    e.preventDefault();
+    this.setState( { [ e.target.name ]: e.target.value } )
+  }
+  toggleEdit() {
+    (this.state.edit) ? this.setState( { edit: false } ) : this.setState( { edit: true } )
+  }
+  renderNote(challenge) {
+    console.log(this.state)
+    if (this.state.edit) {
+      return <div className="edit">
+        <textarea rows="6" cols="36" name={ challenge.id } onChange={ this.onInputChange } value={ this.state.input }></textarea>
+        <button className="btn-input new" onClick={ () => this.toggleEdit(challenge.note) }>Add Note</button>
+      </div>
+    }
+    else { return <div className="edit">
+      <textarea rows="6" cols="36" className="nofocus" name={ challenge.id } onChange={ this.onInputChange } value={ this.state.input }></textarea>
+    </div>
+    }
+  }
   render() {
     const journal = this.props.data.notes
     const today = (journal.length -1)
+    console.log('journal', journal)
     const notes = journal.map( (note) => {
-      return <li key={note.day} className="challenge">
+      return (
+        <li key={note.day} className="challenge">
           <div className="title"><h1>{note.challenge.title}</h1></div>
-          <div className="note">
-            <p>{note.challenge.note}</p>
-          </div>
+            <div className="note" onClick={ () => this.toggleEdit(note.challenge.id)}>
+              {this.renderNote(note.challenge, false)}
+            </div>
         </li>
+      )
     })
     const settings = {
       dots: false,
@@ -124,26 +158,19 @@ class Journal extends Component {
       speed: 500,
       slidesToShow: 1,
       slidesToScroll: 1,
-      centerMode: true,
       initialSlide: today
     }
     return (
-      <Slider className="journal fadein" {...settings}>
+      <Slider className="slider fadein" {...settings} >
         {notes}
       </Slider>
     )
   }
 }
 
-class NoteInput extends Component {
-  render() {
-    return (
-    <textarea rows="4" cols="50">So what's up?</textarea>
-    );
-  }
-}
 
 const data = {
+  page: 'challenge',
   displayday: 1,
   displayloc: 0,
   status: 'new',
@@ -189,6 +216,29 @@ const data = {
   }]
 }
 
+// class Journal2 extends Component {
+//   mixins: [Carousel.ControllerMixin]
+//   render() {
+//     const journal = this.props.data.notes
+//     const today = (journal.length -1)
+//     const notes = journal.map( (note) => {
+//       return <li key={note.day} className="challenge">
+//           <div className="title"><h1>{note.challenge.title}</h1></div>
+//           <div className="note">
+//             <p>{note.challenge.note}</p>
+//           </div>
+//         </li>
+//     })
+//     return (
+//       <Carousel ref="carousel" data={this.setCarouselData.bind(this, 'carousel')}>
+//         {notes}
+//       </Carousel>
+//       {this.state.carousels.carousel ? <button type="button" onClick={this.state.carousels.carousel.goToSlide.bind(null,1)}>
+//         Go to slide 2
+//       </button> : null}
+//     )
+//   }
+// }
 // VRAAG: background or on load?
 //    after midnight
 //    setdaystatus={ note ? done : passed },

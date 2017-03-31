@@ -91,8 +91,7 @@ button {
   font-size: 13px; }
 
 .new {
-  width: 185px;
-  height: 38px;
+  padding: 8px 18px;
   border-radius: 26px;
   background-color: #27BDFF;
   border: solid 2px #27BDFF; }
@@ -109,8 +108,7 @@ button {
 .accepted {
   cursor: not-allowed;
   color: rgba(255, 255, 255, 0.65);
-  width: 178px;
-  height: 38px;
+  padding: 8px 18px;
   border-radius: 26px;
   border: none;
   background-color: rgba(255, 255, 255, 0.35); }
@@ -118,24 +116,38 @@ button {
 .journal {
   text-align: center; }
 
-.note1 {
-  width: 100%;
-  margin: 0 auto;
-  height: 400px;
-  background-color: rgba(255, 255, 255, 0.85); }
-
 .note {
+  position: relative;
   width: 90%;
   min-height: 200px;
+  margin-bottom: 40px !important;
   border-radius: 4px;
+  margin: 0 auto;
   background-color: rgba(37, 37, 37, 0.4); }
-
-.note h1 {
-  font-size: 15px; }
 
 .note p {
   padding: 18px;
   font-size: 15px; }
+
+textarea {
+  border: none;
+  background-color: transparent;
+  color: white;
+  font-size: 15px;
+  font-family: "Open Sans", sans-serif;
+  box-shadow: none;
+  padding: 15px; }
+
+textarea:focus {
+  outline: none; }
+
+.btn-input {
+  position: absolute;
+  bottom: -30px;
+  right: 20px; }
+
+.nofocus {
+  background-color: rgba(37, 37, 37, 0.2); }
 
 .navbar {
   text-align: center;
@@ -158,38 +170,3 @@ button {
 @media (min-width: 1024px) {
   .page {
     margin: 5% 28%; } }
-
-@font-face {
-  font-family: "San Francisco";
-  font-weight: 100;
-  src: url("https://applesocial.s3.amazonaws.com/assets/styles/fonts/sanfrancisco/sanfranciscodisplay-ultralight-webfont.woff"); }
-
-/** Thin */
-@font-face {
-  font-family: "San Francisco Light";
-  font-weight: 200;
-  src: url("https://applesocial.s3.amazonaws.com/assets/styles/fonts/sanfrancisco/sanfranciscodisplay-thin-webfont.woff"); }
-
-/** Regular */
-@font-face {
-  font-family: "San Francisco";
-  font-weight: 400;
-  src: url("https://applesocial.s3.amazonaws.com/assets/styles/fonts/sanfrancisco/sanfranciscodisplay-regular-webfont.woff"); }
-
-/** Medium */
-@font-face {
-  font-family: "San Francisco";
-  font-weight: 500;
-  src: url("https://applesocial.s3.amazonaws.com/assets/styles/fonts/sanfrancisco/sanfranciscodisplay-medium-webfont.woff"); }
-
-/** Semi Bold */
-@font-face {
-  font-family: "San Francisco";
-  font-weight: 600;
-  src: url("https://applesocial.s3.amazonaws.com/assets/styles/fonts/sanfrancisco/sanfranciscodisplay-semibold-webfont.woff"); }
-
-/** Bold */
-@font-face {
-  font-family: "San Francisco";
-  font-weight: 700;
-  src: url("https://applesocial.s3.amazonaws.com/assets/styles/fonts/sanfrancisco/sanfranciscodisplay-bold-webfont.woff"); }
